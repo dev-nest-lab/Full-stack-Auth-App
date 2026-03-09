@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    container_name: postgres_container
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "5435:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend_python
+    container_name: fastapi_container
+    restart: always
+    depends_on:
+      - db
+    env_file:
+      - .env
+    ports:
+      - "8004:8000"
+
+  frontend:
+    build: ./frontend  
+    container_name: react_container
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "3004:80"
+
+volumes:
+  postgres_data:

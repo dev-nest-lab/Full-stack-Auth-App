@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+psycopg2-binary
+passlib[argon2]
+python-jose[cryptography]
+python-dotenv
+email-validator
+pytest #runs tests
+httpx #required by TestClient to test FastAPI endpoints
+
